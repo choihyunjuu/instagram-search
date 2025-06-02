@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>인스타그램 검색 도구</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+      text-align: center;
+      margin-top: 100px;
+    }
+    h1 {
+      font-size: 2em;
+      color: #E1306C;
+    }
+    select, input[type="text"], button {
+      font-size: 1.2em;
+      padding: 10px 20px;
+      margin: 10px;
+      border-radius: 25px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #E1306C;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #c92c5e;
+    }
+  </style>
+</head>
+<body>
+  <h1>인스타그램 검색</h1>
+  <form id="searchForm">
+    <select id="searchType">
+      <option value="tag">해시태그</option>
+      <option value="user">사용자</option>
+    </select>
+    <input type="text" id="query" placeholder="검색어 입력" required>
+    <button type="submit">검색</button>
+  </form>
+
+  <script>
+    document.getElementById("searchForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const type = document.getElementById("searchType").value;
+      const query = document.getElementById("query").value.trim();
+      if (!query) return;
+
+      const baseUrl = type === "tag" 
+        ? `https://www.instagram.com/explore/tags/${encodeURIComponent(query)}/`
+        : `https://www.instagram.com/${encodeURIComponent(query)}/`;
+
+      window.open(baseUrl, "_blank");
+    });
+  </script>
+</body>
+</html>
